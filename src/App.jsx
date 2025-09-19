@@ -8,7 +8,7 @@ export default function App() {
     <BrowserRouter>
       <header className="bg-white shadow">
         <div className="container mx-auto p-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold">Fine Luxury Property</Link>
+          <Link to="/" className="text-xl font-bold">Real Estate Website</Link>
           <nav>
             <Link to="/properties" className="mr-4 text-gray-700">Properties</Link>
           </nav>
@@ -23,7 +23,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className="bg-gray-100 text-center p-4">© {new Date().getFullYear()} Fine Luxury Property</footer>
+      <footer className="bg-gray-100 text-center p-4">© {new Date().getFullYear()} Real Estate Website</footer>
     </BrowserRouter>
   );
 }
