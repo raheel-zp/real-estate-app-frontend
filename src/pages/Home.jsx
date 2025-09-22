@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchProperties } from "../api/properties";
 import Pagination from "../components/Pagination";
-import { Link } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 const Home = () => {
   const [properties, setProperties] = useState([]);
@@ -35,7 +34,6 @@ const Home = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* Filters */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <input
           type="text"
@@ -70,14 +68,11 @@ const Home = () => {
         />
       </div>
 
-      {/* Property Grid */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {properties.map((property) => (
            <PropertyCard property={property} key={property._id} />
         ))}
       </div>
-
-      {/* Pagination */}
       <Pagination page={meta.page} pages={pages} onPageChange={handlePageChange} />
       
     </div>
