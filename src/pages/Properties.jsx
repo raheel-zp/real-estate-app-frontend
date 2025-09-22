@@ -34,7 +34,6 @@ const Properties = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* Filters */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <input
           type="text"
@@ -69,7 +68,6 @@ const Properties = () => {
         />
       </div>
 
-      {/* Property Grid */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {properties.map((property) => (
           <div key={property.id} className="border rounded-lg shadow hover:shadow-lg transition">
@@ -90,8 +88,7 @@ const Properties = () => {
           </div>
         ))}
       </div>
-
-      {/* Pagination */}
+      
       <Pagination page={meta.page} pages={pages} onPageChange={handlePageChange} />
       
     </div>
