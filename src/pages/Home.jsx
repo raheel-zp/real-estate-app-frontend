@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchProperties } from "../api/properties";
 import Pagination from "../components/Pagination";
-import { Link } from "react-router-dom";
+import PropertyCard from "../components/PropertyCard";
 
 const Home = () => {
   const [properties, setProperties] = useState([]);
@@ -98,36 +98,7 @@ const Home = () => {
         <>
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {properties.map((property) => (
-              <div
-                key={property._id}
-                className="border rounded-lg shadow hover:shadow-lg transition"
-              >
-                <img
-                  src={
-                    property.images?.[0] ||
-                    "https://via.placeholder.com/400x250"
-                  }
-                  alt={property.title}
-                  className="h-48 w-full object-cover rounded-t-lg"
-                />
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold">{property.title}</h2>
-                  <p className="text-gray-600">{property.location}</p>
-                  <p className="text-blue-600 font-bold mt-2">
-                    ${property.price?.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {property.bedrooms} Beds • {property.bathrooms} Baths •{" "}
-                    {property.area} sqft
-                  </p>
-                  <Link
-                    to={`/property/${property._id}`}
-                    className="text-sm text-blue-600"
-                  >
-                    View
-                  </Link>
-                </div>
-              </div>
+              <PropertyCard property={property} key={property._id} />
             ))}
           </div>
 

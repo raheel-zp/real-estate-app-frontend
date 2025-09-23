@@ -27,10 +27,19 @@ export default function Header() {
               Properties
             </Link>
 
+            <Link to="/favorites" className="text-gray-700">
+              Favorites
+            </Link>
+
             {auth.user.role === "admin" && (
-              <Link to="/create-property" className="text-gray-700">
-                Create Property
-              </Link>
+              <>
+                <Link to="/create-property" className="text-gray-700">
+                  Create Property
+                </Link>
+                <Link to="/admin/inquiries" className="text-gray-700">
+                  Inquiries
+                </Link>
+              </>
             )}
 
             <button onClick={logout} className="text-red-600">
