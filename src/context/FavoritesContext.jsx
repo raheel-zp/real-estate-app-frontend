@@ -9,6 +9,9 @@ export const FavoritesProvider = ({ children }) => {
   useEffect(() => {
     const loadFavorites = async () => {
       try {
+        const auth = localStorage.getItem("auth");
+        if (!auth) return;
+
         const { data } = await getFavorites();
         setFavorites(data);
       } catch (err) {
