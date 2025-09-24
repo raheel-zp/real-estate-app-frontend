@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useFavorites } from "../context/FavoritesContext";
+import { deleteProperty } from "../api/properties";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function PropertyCard({ property }) {
   const { favorites, toggleFavorite } = useFavorites();
   const isFavorite = favorites.some((fav) => fav._id === property._id);
+  const { auth } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this property?")) {
+      await deleteProperty(id);
+      navigate("/properties");
+    }
+  };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-sm relative">
+    <div className="rounded-lg overflow-hidden shadow-sm relative">
       <button
         onClick={() => toggleFavorite(property._id)}
         className="absolute top-3 right-3 text-red-500 text-xl focus:outline-none"
@@ -33,6 +47,22 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
       </Link>
+      {auth?.user?.role === "admin" && (
+        <div className="flex space-x-2 mt-2">
+          <button
+            onClick={() => navigate(`/edit-property/${property._id}`)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => handleDelete(property._id)}
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 }

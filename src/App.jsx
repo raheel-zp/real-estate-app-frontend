@@ -4,6 +4,7 @@ import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateProperty from "./pages/CreateProperty";
+import EditProperty from "./pages/EditProperty";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Header from "./components/Header";
@@ -22,6 +23,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <CreateProperty />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-property/:id"
+            element={
+              <ProtectedRoute>
+                <EditProperty />
               </ProtectedRoute>
             }
           />
