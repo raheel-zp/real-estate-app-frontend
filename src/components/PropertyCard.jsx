@@ -10,6 +10,8 @@ export default function PropertyCard({ property }) {
   const { favorites, toggleFavorite } = useFavorites();
   const isFavorite = favorites.some((fav) => fav._id === property._id);
   const { auth } = useContext(AuthContext);
+  const placeholder = "/images/placeholder.jpg";
+  const image = property.images?.[0] || placeholder;
 
   const navigate = useNavigate();
 
@@ -33,9 +35,13 @@ export default function PropertyCard({ property }) {
         className="block border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
       >
         <img
-          src={property.images?.[0] || "https://via.placeholder.com/600x400"}
+          src={image}
           alt={property.title}
           className="w-full h-44 object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = placeholder;
+          }}
         />
         <div className="p-4">
           <h3 className="font-semibold text-lg">{property.title}</h3>

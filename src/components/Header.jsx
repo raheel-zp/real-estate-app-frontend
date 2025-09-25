@@ -31,6 +31,10 @@ export default function Header() {
               Favorites
             </Link>
 
+            <Link to="/profile" className="hover:underline">
+              My Profile
+            </Link>
+
             {auth.user.role === "admin" && (
               <>
                 <Link to="/create-property" className="text-gray-700">

@@ -78,19 +78,7 @@ const Properties = () => {
         />
       </div>
 
-      {/* Properties Grid */}
-      {loading ? (
-        <div className="flex flex-col items-center justify-center py-20">
-          <img
-            src="/house.png"
-            alt="Loading"
-            className="w-20 h-20 animate-spin"
-          />
-          <p className="mt-4 text-lg font-semibold text-gray-700">
-            Loading properties...
-          </p>
-        </div>
-      ) : properties.length === 0 ? (
+      {properties.length === 0 ? (
         <div className="text-center py-10 text-gray-600">
           No properties found.
         </div>
@@ -102,7 +90,6 @@ const Properties = () => {
             ))}
           </div>
 
-          {/* Pagination */}
           {pages > 1 && (
             <Pagination
               page={meta.page}

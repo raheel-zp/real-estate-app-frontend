@@ -1,25 +1,31 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getFavorites, addFavorite, removeFavorite } from "../api/favorites";
+import { useAuth } from "./AuthContext";
 
 const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
+  const { auth } = useAuth();
   const [favorites, setFavorites] = useState([]);
+  const [loadingFavorites, setLoadingFavorites] = useState(false);
 
   useEffect(() => {
     const loadFavorites = async () => {
       try {
-        const auth = localStorage.getItem("auth");
-        if (!auth) return;
-
+        if (!auth) {
+          setFavorites([]);
+          return;
+        }
+        setLoadingFavorites(true);
         const { data } = await getFavorites();
         setFavorites(data);
+        setLoadingFavorites(false);
       } catch (err) {
         console.error("Error loading favorites", err);
       }
     };
     loadFavorites();
-  }, []);
+  }, [auth]);
 
   const toggleFavorite = async (propertyId) => {
     try {

@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import Header from "./components/Header";
 import Favorites from "./pages/Favorites";
 import AdminInquiries from "./pages/AdminInquiries";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -74,6 +75,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <PropertyDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />

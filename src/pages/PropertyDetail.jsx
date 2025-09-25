@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 const PropertyDetail = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
+  const placeholder = "/images/placeholder.jpg";
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -23,7 +24,7 @@ const PropertyDetail = () => {
     fetchProperty();
   }, [id]);
 
-  if (!property) return <p>Loading...</p>;
+  if (!property) return;
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -37,16 +38,20 @@ const PropertyDetail = () => {
           property.images.map((img, index) => (
             <SwiperSlide key={index}>
               <img
-                src={img}
+                src={img ? img : placeholder}
                 alt={`Property ${index + 1}`}
                 className="w-full h-96 object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = placeholder;
+                }}
               />
             </SwiperSlide>
           ))
         ) : (
           <SwiperSlide>
             <img
-              src="/no-image.jpg"
+              src={placeholder}
               alt="No property"
               className="w-full h-96 object-cover"
             />
